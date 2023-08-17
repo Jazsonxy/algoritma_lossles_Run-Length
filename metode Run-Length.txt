@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+using namespace std;
+// Kompresi menggunakan metode Run-Length
+string compress(const string& str) {
+ string compressed;
+ int count = 1;
+ for (int i = 1; i < str.length(); i++) {
+ if (str[i] == str[i - 1]) {
+ count++;
+ } else {
+ stringstream ss;
+ ss << count;
+ compressed += str[i - 1] + ss.str();
+ count = 1;
+ }
+ }
+ // Menambahkan karakter terakhir dan jumlahnya
+ stringstream ss;
+ ss << count;
+ compressed += str[str.length() - 1] + ss.str();
+ return compressed;
+}
+// Dekompresi menggunakan metode Run-Length
+string decompress(const string& str) {
+ string decompressed;
+ int i = 0;
+ while (i < str.length()) {
+ char character = str[i];
+ i++;
+ int count = 0
+while (i < str.length() && isdigit(str[i])) {
+ count = count * 10 + (str[i] - '0');
+ i++;
+ }
+ decompressed.append(count, character);
+ }
+ return decompressed;
+}
+int main() {
+ string inputString;
+ cout << "Enter a string: ";
+ getline(cin, inputString);
+ string compressedString = compress(inputString);
+ cout << "Compressed string: " << compressedString << endl;
+ string decompressedString = decompress(compressedString)
+ cout << "Decompressed string: " << decompressedString << endl;
+ return 0;
+}
